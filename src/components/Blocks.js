@@ -4,7 +4,7 @@ function Option({ children, ...props }) {
   return <label className="Option" {...props}>{children}</label>
 }
 
-export function Block({ block, updateBlock }) {
+export function Block({ block, updateBlock, handleDrag, handleDrop }) {
   const updateBlockKey = (event) => {
     const target = event.target;
     const value = target.type === 'checkbox' ? target.checked : target.value;
@@ -16,6 +16,9 @@ export function Block({ block, updateBlock }) {
   return <div
     className="Block"
     draggable={true}
+    onDragStart={handleDrag}
+    onDrop={handleDrop}
+    onDragOver={e => e.preventDefault()}
   >
     <Option>Type: <select name="type" value={block.type} onChange={updateBlockKey}>
         <option>Reps</option>
