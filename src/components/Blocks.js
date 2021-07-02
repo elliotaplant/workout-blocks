@@ -28,6 +28,9 @@ export function Block({ block, updateBlock, handleDrag, handleDrop }) {
         <option>Rest</option>
       </select>
     </Option>
+    {block.type !== 'Rest' &&
+      <Option>Exercise: <input name="exercise" value={block.exercise} onChange={updateBlockKey} /></Option>
+    }
     {
       {
         Reps: <Reps block={block} updateBlockKey={updateBlockKey} />,
@@ -44,37 +47,34 @@ export function Block({ block, updateBlock, handleDrag, handleDrop }) {
 
 export function Reps({ block, updateBlockKey }) {
   return <>
-    <Option>Exercise: <input name="exercise" value={block.exercise} onChange={updateBlockKey} /></Option>
     <Option>Number: <input type="number" name="count" value={block.count} onChange={updateBlockKey} /></Option>
   </>
 }
 
 export function Timer({ block, updateBlockKey }) {
   return <>
-    <Option>Exercise: <input name="exercise" value={block.exercise} onChange={updateBlockKey} /></Option>
+    <Option>Auto Start: <input type="checkbox" name="autoStart" checked={!!block.autoStart} onChange={updateBlockKey} /></Option>
     <Option>Time (seconds): <input type="number" name="timer" value={block.timer} onChange={updateBlockKey} /></Option>
   </>
 }
 
 export function AMRAP({ block, updateBlockKey }) {
   return <>
-    <Option>Exercise: <input name="exercise" value={block.exercise} onChange={updateBlockKey} /></Option>
-    <Option>Has Rep Counter: <input type="checkbox" name="hasRepCounter" checked={block.hasRepCounter} onChange={updateBlockKey} /></Option>
-    <Option>Has Timer: <input type="checkbox" name="hasTimer" checked={block.hasTimer} onChange={updateBlockKey} /></Option>
+    <Option>Has Rep Counter: <input type="checkbox" name="hasRepCounter" checked={!!block.hasRepCounter} onChange={updateBlockKey} /></Option>
+    <Option>Has Timer: <input type="checkbox" name="hasTimer" checked={!!block.hasTimer} onChange={updateBlockKey} /></Option>
     {block.hasTimer && <Option>Time (seconds): <input type="number" name="timer" value={block.timer} onChange={updateBlockKey} /></Option>}
   </>
 }
 
 export function ALAP({ block, updateBlockKey }) {
   return <>
-    <Option>Exercise: <input name="exercise" value={block.exercise} onChange={updateBlockKey} /></Option>
-    <Option>Has Time Counter: <input type="checkbox" name="hasTimeCounter" value={block.hasTimeCounter} onChange={updateBlockKey} /></Option>
+    <Option>Has Time Counter: <input type="checkbox" name="hasTimeCounter" checked={!!block.hasTimeCounter} onChange={updateBlockKey} /></Option>
   </>
   }
 
 export function Rest({ block, updateBlockKey }) {
   return <div>
-    <Option>Auto Start: <input type="checkbox" name="autoStart" checked={block.autoStart} onChange={updateBlockKey} /></Option>
+    <Option>Auto Start: <input type="checkbox" name="autoStart" checked={!!block.autoStart} onChange={updateBlockKey} /></Option>
     <Option>Time (seconds): <input type="number" name="timer" value={block.timer} onChange={updateBlockKey} /></Option>
   </div>
 }

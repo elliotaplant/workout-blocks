@@ -2,6 +2,7 @@ import { useState } from 'react';
 import './App.css';
 import Workouts from './components/Workouts';
 import EditArea from './components/EditArea';
+import Run from './components/Run';
 import { Switch, Route, Redirect, BrowserRouter as Router, } from "react-router-dom";
 
 function App({ initialWorkouts }) {
@@ -29,7 +30,7 @@ function App({ initialWorkouts }) {
             <EditArea updateWorkout={updateWorkout} workouts={workouts} />
           </Route>
           <Route path="/run/:workoutIndex">
-            <h1>Run</h1>
+            <Run workouts={workouts} />
           </Route>
           <Redirect from="/" to="/workouts" />
         </Switch>

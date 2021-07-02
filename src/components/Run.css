@@ -1,0 +1,11 @@
+.run-container {
+  text-align: center;
+  padding: 1em;
+}
+
+.begin-button {
+  font-size: 2em;
+  padding: 0.5em;
+  width: 100%;
+  cursor: pointer;
+}
