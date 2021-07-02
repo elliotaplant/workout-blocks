@@ -1,5 +1,11 @@
 .WorkoutEdit {
-  background-color: grey;
+  background-color: lightgrey;
   flex-grow: 1;
   padding: 0.5em;
+}
+
+.Add {
+  font-size: 2em;
+  display: block;
+  width: 100%;
 }

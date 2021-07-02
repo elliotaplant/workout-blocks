@@ -1,15 +1,16 @@
 import "./NavBar.css";
 import { NavLink } from "react-router-dom";
 
-function NavBar({ workouts }) {
+function NavBar({ workouts, addWorkout }) {
   return (
     <div className="NavBar">
       <h1>Workouts</h1>
       <ul>
-        {workouts.map(({ id, name }) => <li key={id} >
-          <NavLink to={`edit/${id}`} activeClassName="activeLink">{name}</NavLink>
+        {workouts.map(({ name }, i) => <li key={i} >
+          <NavLink to={`edit/${i}`} activeClassName="activeLink">{name}</NavLink>
         </li>)}
       </ul>
+      <button className="AddWorkout" onClick={addWorkout}>+</button>
     </div>
   );
 }

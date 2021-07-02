@@ -4,9 +4,11 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+const initialWorkouts = JSON.parse(localStorage.getItem('workouts') || '[]');
+
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <App initialWorkouts={initialWorkouts} />
   </React.StrictMode>,
   document.getElementById('root')
 );
