@@ -1,5 +1,6 @@
 import './EditArea.css';
 import { Route, useParams, } from "react-router-dom";
+import { Block } from './Blocks'
 
 function EditArea({ workouts, updateWorkout }) {
   return (
@@ -7,6 +8,20 @@ function EditArea({ workouts, updateWorkout }) {
       <WorkoutEdit updateWorkout={updateWorkout} workouts={workouts} />
     </Route>
   );
+}
+
+function newBlock() {
+  return {
+    autoStart: false,
+    count: 0,
+    exercise: '',
+    hasRepCounter: false,
+    hasTimeCounter: false,
+    hasTimer: false,
+    note: '',
+    timer: 0,
+    type: 'Reps',
+  };
 }
 
 function WorkoutEdit({ updateWorkout, workouts }) {
@@ -20,7 +35,7 @@ function WorkoutEdit({ updateWorkout, workouts }) {
     blocks: [...blocks.slice(0, i), block, ...blocks.slice(i + 1)]
   });
 
-  const addBlock = () => updateThisWorkout({ ...workout, blocks: [...blocks, {}] });
+  const addBlock = () => updateThisWorkout({ ...workout, blocks: [...blocks, newBlock()] });
 
   return <div className="WorkoutEdit">
     <h3>Requested workout ID: {workoutIndex}</h3>
@@ -33,21 +48,6 @@ function WorkoutEdit({ updateWorkout, workouts }) {
 
 function Add({ addBlock }) {
   return <button onClick={addBlock} className="Add">+</button>
-}
-
-function Block({ block, updateBlock }) {
-  const updateType = ({ target: { value }}) => updateBlock({ ...block, type: value });
-
-  return <div className="Block">
-    <h3>{block.name || "Name"}</h3>
-    <label>Type</label>
-    <select value={block.type} onChange={updateType}>
-      <option>Reps</option>
-      <option>Time</option>
-      <option>AMRAP</option>
-      <option>ALAP</option>
-    </select>
-  </div>
 }
 
 export default EditArea;
