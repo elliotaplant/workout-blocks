@@ -54,7 +54,7 @@ function WorkoutEdit({ updateWorkout, workouts }) {
   }
 
   return <div className="WorkoutEdit">
-    <h3>Requested workout ID: {workoutIndex}</h3>
+    <h3>Workout Name: <input name="name" onChange={({ target: { value }}) => updateThisWorkout({ ...workout, name: value })} /> </h3>
     <ul>
       {blocks.map((block, i) => <li key={i}>
         <Block
