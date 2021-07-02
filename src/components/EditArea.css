@@ -1,7 +1,27 @@
 .WorkoutEdit {
-  background-color: lightgrey;
   flex-grow: 1;
   padding: 0.5em;
+}
+
+.edit-header {
+  padding: 1em 0;
+}
+
+.workouts-link {
+  text-decoration: none;
+  padding: 0.5em;
+  border: 1px solid black;
+  display: inline-block;
+  margin-right: 1em;
+  border-radius: 0.5em;
+}
+
+.workouts-link:visited {
+  color: black;
+}
+
+.workout-name {
+  display: inline;
 }
 
 .Add {

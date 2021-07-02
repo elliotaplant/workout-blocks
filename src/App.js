@@ -1,9 +1,8 @@
 import { useState } from 'react';
 import './App.css';
-import NavBar from './components/NavBar';
-import Inspector from './components/Inspector';
+import Workouts from './components/Workouts';
 import EditArea from './components/EditArea';
-import { BrowserRouter as Router, } from "react-router-dom";
+import { Switch, Route, Redirect, BrowserRouter as Router, } from "react-router-dom";
 
 function App({ initialWorkouts }) {
   const [workouts, updateWorkouts] = useState(initialWorkouts || [])
@@ -22,9 +21,18 @@ function App({ initialWorkouts }) {
   return (
     <Router>
       <div className="App">
-        <NavBar workouts={workouts} addWorkout={addWorkout} />
-        <EditArea updateWorkout={updateWorkout} workouts={workouts} />
-        <Inspector />
+        <Switch>
+          <Route path="/workouts">
+            <Workouts workouts={workouts} addWorkout={addWorkout} />
+          </Route>
+          <Route path="/edit/:workoutIndex">
+            <EditArea updateWorkout={updateWorkout} workouts={workouts} />
+          </Route>
+          <Route path="/run/:workoutIndex">
+            <h1>Run</h1>
+          </Route>
+          <Redirect from="/" to="/workouts" />
+        </Switch>
       </div>
     </Router>
   );

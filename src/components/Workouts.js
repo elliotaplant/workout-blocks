@@ -1,9 +1,9 @@
-import "./NavBar.css";
+import "./Workouts.css";
 import { NavLink } from "react-router-dom";
 
-function NavBar({ workouts, addWorkout }) {
+function Workouts({ workouts, addWorkout }) {
   return (
-    <div className="NavBar">
+    <div className="Workouts">
       <h1>Workouts</h1>
       <ul>
         {workouts.map(({ name }, i) => <li key={i} >
@@ -15,4 +15,4 @@ function NavBar({ workouts, addWorkout }) {
   );
 }
 
-export default NavBar;
+export default Workouts;

@@ -1,5 +1,5 @@
 import './EditArea.css';
-import { Route, useParams, } from 'react-router-dom';
+import { Link, Route, useParams, } from 'react-router-dom';
 import { useState } from 'react'
 import { Block } from './Blocks'
 
@@ -54,7 +54,14 @@ function WorkoutEdit({ updateWorkout, workouts }) {
   }
 
   return <div className="WorkoutEdit">
-    <h3>Workout Name: <input name="name" onChange={({ target: { value }}) => updateThisWorkout({ ...workout, name: value })} /> </h3>
+    <header className="edit-header">
+      <Link className="workouts-link" to="/workouts">{'<'} Workouts</Link>
+      <h3 className="workout-name">
+        Workout Name: <input
+          name="name"
+          onChange={({ target: { value }}) => updateThisWorkout({ ...workout, name: value })} />
+      </h3>
+    </header>
     <ul>
       {blocks.map((block, i) => <li key={i}>
         <Block
