@@ -1,4 +1,16 @@
+.Block {
+  padding: 0.5em;
+  border: 1px solid black;
+  background-color: white;
+  box-shadow: 0 1px 7px 2px rgba(100, 100, 100, 0.4);
+  margin-bottom: 1em;
+  border-radius: 0.5em;
+  cursor: move;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
 .Option {
-  display: block;
   margin-bottom: 0.5em;
 }

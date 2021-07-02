@@ -13,7 +13,10 @@ export function Block({ block, updateBlock }) {
     return updateBlock({ ...block, [name]: value });
   }
 
-  return <div className="Block">
+  return <div
+    className="Block"
+    draggable={true}
+  >
     <Option>Type: <select name="type" value={block.type} onChange={updateBlockKey}>
         <option>Reps</option>
         <option>Timer</option>
@@ -37,33 +40,33 @@ export function Block({ block, updateBlock }) {
 }
 
 export function Reps({ block, updateBlockKey }) {
-  return <div>
+  return <>
     <Option>Exercise: <input name="exercise" value={block.exercise} onChange={updateBlockKey} /></Option>
     <Option>Number: <input type="number" name="count" value={block.count} onChange={updateBlockKey} /></Option>
-  </div>
+  </>
 }
 
 export function Timer({ block, updateBlockKey }) {
-  return <div>
+  return <>
     <Option>Exercise: <input name="exercise" value={block.exercise} onChange={updateBlockKey} /></Option>
     <Option>Time (seconds): <input type="number" name="timer" value={block.timer} onChange={updateBlockKey} /></Option>
-  </div>
+  </>
 }
 
 export function AMRAP({ block, updateBlockKey }) {
-  return <div>
+  return <>
     <Option>Exercise: <input name="exercise" value={block.exercise} onChange={updateBlockKey} /></Option>
     <Option>Has Rep Counter: <input type="checkbox" name="hasRepCounter" checked={block.hasRepCounter} onChange={updateBlockKey} /></Option>
     <Option>Has Timer: <input type="checkbox" name="hasTimer" checked={block.hasTimer} onChange={updateBlockKey} /></Option>
     {block.hasTimer && <Option>Time (seconds): <input type="number" name="timer" value={block.timer} onChange={updateBlockKey} /></Option>}
-  </div>
+  </>
 }
 
 export function ALAP({ block, updateBlockKey }) {
-  return <div>
+  return <>
     <Option>Exercise: <input name="exercise" value={block.exercise} onChange={updateBlockKey} /></Option>
     <Option>Has Time Counter: <input type="checkbox" name="hasTimeCounter" value={block.hasTimeCounter} onChange={updateBlockKey} /></Option>
-  </div>
+  </>
   }
 
 export function Rest({ block, updateBlockKey }) {
