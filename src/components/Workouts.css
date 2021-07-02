@@ -1,10 +1,39 @@
 .Workouts {
   padding: 0.5em;
-  text-align: center;
 }
 
 .AddWorkout {
   font-size: 2em;
   width: 100%;
   display: block;
+}
+
+.workout-item {
+  border: 1px solid black;
+  box-shadow: 0 3px 4px 1px rgba(100, 100, 100, 0.4);
+  margin-bottom: 1em;
+  border-radius: 0.5em;
+  display: flex;
+  justify-content: space-around;
+}
+
+.workout-txt  {
+  padding: 0.5em;
+  flex-grow: 1;
+}
+
+.workout-name {
+  width: 50%;
+}
+
+.workout-link {
+  padding: 0.5em;
+  text-decoration: none;
+  color: black;
+  border-left: 1px solid black;
+  text-align: center;
+}
+
+.workout-link:visited {
+  color: black;
 }

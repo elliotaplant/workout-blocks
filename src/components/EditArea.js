@@ -59,6 +59,7 @@ function WorkoutEdit({ updateWorkout, workouts }) {
       <h3 className="workout-name">
         Workout Name: <input
           name="name"
+          value={workout.name}
           onChange={({ target: { value }}) => updateThisWorkout({ ...workout, name: value })} />
       </h3>
     </header>
