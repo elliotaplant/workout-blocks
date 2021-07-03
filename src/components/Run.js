@@ -76,7 +76,7 @@ function RepCounter({ blockIndex, onChange }) {
 }
 
 function RunReps({ block }) {
-  return <p>{block.number} Reps</p>
+  return <p>{block.count} Reps</p>
 }
 
 function RunTimer({ block }) {
