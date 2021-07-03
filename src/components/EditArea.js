@@ -2,6 +2,7 @@ import './EditArea.css';
 import { Link, Route, useParams, } from 'react-router-dom';
 import { useState } from 'react'
 import { Block } from './Blocks'
+import newBlock from './newBlock'
 
 function EditArea({ workouts, updateWorkout }) {
   return (
@@ -11,19 +12,6 @@ function EditArea({ workouts, updateWorkout }) {
   );
 }
 
-function newBlock() {
-  return {
-    autoStart: false,
-    count: 0,
-    exercise: '',
-    hasRepCounter: false,
-    hasTimeCounter: false,
-    hasTimer: false,
-    note: '',
-    timer: 0,
-    type: 'Reps',
-  };
-}
 
 function WorkoutEdit({ updateWorkout, workouts }) {
   const [dragIndex, setDragIndex] = useState(-1);
@@ -73,12 +61,8 @@ function WorkoutEdit({ updateWorkout, workouts }) {
         />
       </li>)}
     </ul>
-    <Add addBlock={addBlock} updateWorkout={updateThisWorkout} />
+    <button onClick={addBlock} className="Add">+</button>
   </div>;
-}
-
-function Add({ addBlock }) {
-  return <button onClick={addBlock} className="Add">+</button>
 }
 
 export default EditArea;

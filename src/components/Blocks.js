@@ -1,4 +1,6 @@
 import './Blocks.css';
+import { useState } from 'react';
+import newBlock from './newBlock'
 
 function Option({ children, ...props }) {
   return <label className="Option" {...props}>{children}</label>
@@ -26,9 +28,10 @@ export function Block({ block, updateBlock, handleDrag, handleDrop }) {
         <option>AMRAP</option>
         <option>ALAP</option>
         <option>Rest</option>
+        <option>Repeat</option>
       </select>
     </Option>
-    {block.type !== 'Rest' &&
+    {block.type !== 'Rest' && block.type !== 'Repeat' &&
       <Option>Exercise: <input name="exercise" value={block.exercise} onChange={updateBlockKey} /></Option>
     }
     {
@@ -38,6 +41,7 @@ export function Block({ block, updateBlock, handleDrag, handleDrop }) {
         AMRAP: <AMRAP block={block} updateBlockKey={updateBlockKey} />,
         ALAP: <ALAP block={block} updateBlockKey={updateBlockKey} />,
         Rest: <Rest block={block} updateBlockKey={updateBlockKey} />,
+        Repeat: <Repeat block={block} updateBlock={updateBlock} />,
       }[block.type]
     }
 
@@ -73,8 +77,51 @@ export function ALAP({ block, updateBlockKey }) {
   }
 
 export function Rest({ block, updateBlockKey }) {
-  return <div>
+  return <>
+    <h3>Rest</h3>
     <Option>Auto Start: <input type="checkbox" name="autoStart" checked={!!block.autoStart} onChange={updateBlockKey} /></Option>
     <Option>Time (seconds): <input type="number" name="timer" value={block.timer} onChange={updateBlockKey} /></Option>
+  </>
+}
+
+export function Repeat({ block, updateBlockKey, updateBlock }) {
+  const [dragIndex, setDragIndex] = useState(-1);
+  const subBlocks = block.subBlocks || [];
+
+  const updateSubBlock = (i, subBlock) => updateBlock({
+    ...block,
+    subBlocks: [...subBlocks.slice(0, i), subBlock, ...subBlocks.slice(i + 1)]
+  });
+
+  const addBlock = () => updateBlock({ ...block, subBlocks: [...subBlocks, newBlock()] });
+
+  const handleDrag = (e, i) => {
+    setDragIndex(i);
+  }
+
+  const handleDrop = (e, dropIndex) => {
+    const blocksWithoutDrag = [...subBlocks.slice(0, dragIndex), ...subBlocks.slice(dragIndex + 1)];
+    const blocksWithNewDrag = [
+      ...blocksWithoutDrag.slice(0, dropIndex),
+      subBlocks[dragIndex],
+      ...blocksWithoutDrag.slice(dropIndex),
+    ];
+
+    updateBlock({ ...block, subBlocks: blocksWithNewDrag })
+  }
+
+  return <div className="sub-block-container">
+      <Option>Sets: <input name="sets" type="number" value={subBlocks.sets} onChange={updateBlockKey} /></Option>
+      <ul>
+        {subBlocks.map((block, i) => <li key={i}>
+          <Block
+            block={block}
+            updateBlock={(block) => updateSubBlock(i, block)}
+            handleDrag={(e) => handleDrag(e, i)}
+            handleDrop={(e) => handleDrop(e, i)}
+          />
+        </li>)}
+      </ul>
+      <button onClick={addBlock} className="Add">+</button>
   </div>
 }

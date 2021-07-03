@@ -13,4 +13,10 @@
 
 .Option {
   margin-bottom: 0.5em;
+  display: block;
+}
+
+.sub-block-container {
+  padding: 1em 0 1em 1em;
+  width: 100%;
 }
