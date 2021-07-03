@@ -1,5 +1,5 @@
 import './EditArea.css';
-import { Link, Route, useParams, } from 'react-router-dom';
+import { Redirect, Link, Route, useParams, } from 'react-router-dom';
 import { useState } from 'react'
 import { Block } from './Blocks'
 import newBlock from './newBlock'
@@ -17,6 +17,9 @@ function WorkoutEdit({ updateWorkout, workouts }) {
   const [dragIndex, setDragIndex] = useState(-1);
   const { workoutIndex } = useParams();
   const workout = workouts[workoutIndex];
+  if (!workout) {
+    return <Redirect to="/" />
+  }
   const blocks = workout.blocks;
   const updateThisWorkout = (workout) => updateWorkout(workoutIndex, workout);
 
@@ -26,6 +29,8 @@ function WorkoutEdit({ updateWorkout, workouts }) {
   });
 
   const addBlock = () => updateThisWorkout({ ...workout, blocks: [...blocks, newBlock()] });
+  const deleteBlock = (i) => updateThisWorkout({ ...workout, blocks: [...blocks.slice(0, i), ...blocks.slice(i + 1)] });
+
   const handleDrag = (e, i) => {
     setDragIndex(i);
   }
@@ -58,6 +63,7 @@ function WorkoutEdit({ updateWorkout, workouts }) {
           updateBlock={(block) => updateBlock(i, block)}
           handleDrag={(e) => handleDrag(e, i)}
           handleDrop={(e) => handleDrop(e, i)}
+          deleteBlock={() => deleteBlock(i)}
         />
       </li>)}
     </ul>

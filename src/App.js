@@ -14,6 +14,7 @@ function App({ initialWorkouts }) {
   }
 
   const updateWorkout = (i, workout) => syncWorkouts([...workouts.slice(0, i), workout, ...workouts.slice(i + 1)]);
+
   const addWorkout = () => syncWorkouts([...workouts, {
     name: "New Workout",
     blocks: []

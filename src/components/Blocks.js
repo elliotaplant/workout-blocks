@@ -6,7 +6,7 @@ function Option({ children, ...props }) {
   return <label className="Option" {...props}>{children}</label>
 }
 
-export function Block({ block, updateBlock, handleDrag, handleDrop }) {
+export function Block({ block, updateBlock, handleDrag, handleDrop, deleteBlock }) {
   const updateBlockKey = (event) => {
     const target = event.target;
     const value = target.type === 'checkbox' ? target.checked : target.value;
@@ -41,11 +41,12 @@ export function Block({ block, updateBlock, handleDrag, handleDrop }) {
         AMRAP: <AMRAP block={block} updateBlockKey={updateBlockKey} />,
         ALAP: <ALAP block={block} updateBlockKey={updateBlockKey} />,
         Rest: <Rest block={block} updateBlockKey={updateBlockKey} />,
-        Repeat: <Repeat block={block} updateBlock={updateBlock} />,
+        Repeat: <Repeat block={block} updateBlock={updateBlock} updateBlockKey={updateBlockKey}/>,
       }[block.type]
     }
 
-    <Option>Note: <input name="note" onChange={updateBlockKey} placeholder="Focus on your form" /></Option>
+    <Option>Note: <input name="note" value={block.note} onChange={updateBlockKey} placeholder="Focus on your form" /></Option>
+    <button onClick={deleteBlock}>Delete</button>
   </div>
 }
 
@@ -94,6 +95,7 @@ export function Repeat({ block, updateBlockKey, updateBlock }) {
   });
 
   const addBlock = () => updateBlock({ ...block, subBlocks: [...subBlocks, newBlock()] });
+  const deleteBlock = (i) => updateBlock({ ...block, subBlocks: [...subBlocks.slice(0, i), ...subBlocks.slice(i + 1)] });
 
   const handleDrag = (e, i) => {
     setDragIndex(i);
@@ -108,10 +110,12 @@ export function Repeat({ block, updateBlockKey, updateBlock }) {
     ];
 
     updateBlock({ ...block, subBlocks: blocksWithNewDrag })
+    e.preventDefault();
+    e.stopPropagation();
   }
 
   return <div className="sub-block-container">
-      <Option>Sets: <input name="sets" type="number" value={subBlocks.sets} onChange={updateBlockKey} /></Option>
+      <Option>Sets: <input name="sets" type="number" value={block.sets} onChange={updateBlockKey} /></Option>
       <ul>
         {subBlocks.map((block, i) => <li key={i}>
           <Block
@@ -119,6 +123,7 @@ export function Repeat({ block, updateBlockKey, updateBlock }) {
             updateBlock={(block) => updateSubBlock(i, block)}
             handleDrag={(e) => handleDrag(e, i)}
             handleDrop={(e) => handleDrop(e, i)}
+            deleteBlock={() => deleteBlock(i)}
           />
         </li>)}
       </ul>

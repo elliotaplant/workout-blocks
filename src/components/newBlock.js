@@ -7,8 +7,9 @@ export default function newBlock() {
     hasTimeCounter: false,
     hasTimer: false,
     note: '',
+    sets: 0,
+    subBlocks: [],
     timer: 0,
     type: 'Reps',
-    subBlocks: [],
   };
 }
